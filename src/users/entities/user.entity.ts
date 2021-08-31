@@ -15,12 +15,12 @@ registerEnumType(UserRole, { name: 'UserRole' });
 @Entity()
 @InputType()
 export class User extends CoreEntity {
-  @Column()
+  @Column({ unique: true })
   @Field(() => String)
   @IsEmail()
   email: string;
 
-  @Column()
+  @Column({ select: false })
   @Field(() => String)
   @IsString()
   @Length(8)

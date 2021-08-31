@@ -36,13 +36,13 @@ let User = class User extends core_entity_1.CoreEntity {
     }
 };
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.Column({ unique: true }),
     graphql_1.Field(() => String),
     class_validator_1.IsEmail(),
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.Column({ select: false }),
     graphql_1.Field(() => String),
     class_validator_1.IsString(),
     class_validator_1.Length(8),

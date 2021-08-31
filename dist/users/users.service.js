@@ -17,6 +17,8 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const user_entity_1 = require("./entities/user.entity");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 let UsersService = class UsersService {
     constructor(users) {
         this.users = users;
@@ -36,6 +38,16 @@ let UsersService = class UsersService {
                 error: "Couldn't create user.",
             };
         }
+    }
+    async login({ email, password }) {
+        const user = await this.users.findOne({ email }, { select: ['id', 'password'] });
+        const passwordCorrect = await bcrypt.compare(password, user.password);
+        console.log('passwordCorrect', passwordCorrect);
+        const token = jwt.sign({ id: user.id }, 'secret-key');
+        return {
+            ok: true,
+            token,
+        };
     }
 };
 UsersService = __decorate([
