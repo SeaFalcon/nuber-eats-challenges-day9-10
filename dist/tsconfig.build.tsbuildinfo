@@ -5740,13 +5740,43 @@
         "signature": "ace270d18bdb58084a10e2dfcca7326d056db7275292c2c0bc25304614facb07",
         "affectsGlobalScope": false
       },
+      "../node_modules/@types/bcrypt/index.d.ts": {
+        "version": "57ddc4e066366bbe04f497f9afce1c88e088dbd09be0618e072754450de3acbb",
+        "signature": "57ddc4e066366bbe04f497f9afce1c88e088dbd09be0618e072754450de3acbb",
+        "affectsGlobalScope": false
+      },
+      "../src/users/entities/user.entity.ts": {
+        "version": "3356f613323a04d177594acde8bd174e2d28ef744608f6b99abbf38657fb72b5",
+        "signature": "3ec21e3748992839b663d17e6a3d60b204b5d92bec16c9e20183ce1b11892d26",
+        "affectsGlobalScope": false
+      },
+      "../src/users/dtos/create-user.dto.ts": {
+        "version": "6141eba57388c1e54e8503c354757bcd8a60d0a0f68a5cdd027758dd5837e93d",
+        "signature": "9d97a61e60c14236468fa38fad919205eee9aec9e6183874e908825ec50c6fae",
+        "affectsGlobalScope": false
+      },
+      "../src/users/users.service.ts": {
+        "version": "27ca435514ecb7f95ac1962c2d368f14111913daf1ae710b48190b5c022c7b84",
+        "signature": "0a6e2c4914c3ff249710a7bb6b617b73c18dcf3d6c273ecf7744fd541ea1d288",
+        "affectsGlobalScope": false
+      },
+      "../src/users/users.resolver.ts": {
+        "version": "671b29a950fe87203ee9d4991dfef5cfed4e9c175c7459eeda48d3cd0607c429",
+        "signature": "5e468924d5393dde81e09eac41e524adb638dd09e0ba0b1fd9efdfad383e6458",
+        "affectsGlobalScope": false
+      },
+      "../src/users/users.module.ts": {
+        "version": "64edec4f4a74115338eb5e5207f4742c0c84993916873ca800db884a675979dd",
+        "signature": "aa1725e38b5a0b4009f6a74f296f173e7926c119a60454dbd2e523861735df69",
+        "affectsGlobalScope": false
+      },
       "../src/app.module.ts": {
-        "version": "17ece9669f653a87f1b62b4387085a14a301cb6d4c6dd181a1ff07ab702cfe8c",
+        "version": "af1b16cb976a7d857961107f5bcdd34a6fdff388045ca2257646b418f99759be",
         "signature": "b82491e2990291580288c5602d4c017238977749d52b17391f0e45d9a29be644",
         "affectsGlobalScope": false
       },
       "../src/main.ts": {
-        "version": "859f9f6fd9741f2d7917f9f8cafe819ad6a15b417d1e13586b67d673bbc29f67",
+        "version": "052567c5c58d7cc8727131aec4240e2318e21251e8ddb151fefda8a21e28b231",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
@@ -7504,6 +7534,9 @@
       ],
       "../node_modules/@types/babel__traverse/index.d.ts": [
         "../node_modules/@babel/types/lib/index.d.ts"
+      ],
+      "../node_modules/@types/bcrypt/index.d.ts": [
+        "../node_modules/@types/node/index.d.ts"
       ],
       "../node_modules/@types/body-parser/index.d.ts": [
         "../node_modules/@types/connect/index.d.ts",
@@ -10773,7 +10806,9 @@
         "../src/app.service.ts",
         "../src/podcast/entities/episode.entity.ts",
         "../src/podcast/entities/podcast.entity.ts",
-        "../src/podcast/podcasts.module.ts"
+        "../src/podcast/podcasts.module.ts",
+        "../src/users/entities/user.entity.ts",
+        "../src/users/users.module.ts"
       ],
       "../src/app.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts"
@@ -10864,6 +10899,39 @@
         "../src/podcast/dtos/update-podcast.dto.ts",
         "../src/podcast/entities/episode.entity.ts",
         "../src/podcast/entities/podcast.entity.ts"
+      ],
+      "../src/users/dtos/create-user.dto.ts": [
+        "../node_modules/@nestjs/graphql/index.d.ts",
+        "../src/podcast/dtos/output.dto.ts",
+        "../src/users/entities/user.entity.ts"
+      ],
+      "../src/users/entities/user.entity.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/graphql/index.d.ts",
+        "../node_modules/@types/bcrypt/index.d.ts",
+        "../node_modules/class-validator/types/index.d.ts",
+        "../node_modules/typeorm/index.d.ts",
+        "../src/podcast/entities/core.entity.ts"
+      ],
+      "../src/users/users.module.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/typeorm/index.d.ts",
+        "../src/users/entities/user.entity.ts",
+        "../src/users/users.resolver.ts",
+        "../src/users/users.service.ts"
+      ],
+      "../src/users/users.resolver.ts": [
+        "../node_modules/@nestjs/graphql/index.d.ts",
+        "../src/users/dtos/create-user.dto.ts",
+        "../src/users/entities/user.entity.ts",
+        "../src/users/users.service.ts"
+      ],
+      "../src/users/users.service.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/typeorm/index.d.ts",
+        "../node_modules/typeorm/index.d.ts",
+        "../src/users/dtos/create-user.dto.ts",
+        "../src/users/entities/user.entity.ts"
       ]
     },
     "exportedModulesMap": {
@@ -12342,6 +12410,9 @@
       ],
       "../node_modules/@types/babel__traverse/index.d.ts": [
         "../node_modules/@babel/types/lib/index.d.ts"
+      ],
+      "../node_modules/@types/bcrypt/index.d.ts": [
+        "../node_modules/@types/node/index.d.ts"
       ],
       "../node_modules/@types/body-parser/index.d.ts": [
         "../node_modules/@types/connect/index.d.ts",
@@ -15652,6 +15723,23 @@
         "../src/podcast/dtos/update-podcast.dto.ts",
         "../src/podcast/entities/episode.entity.ts",
         "../src/podcast/entities/podcast.entity.ts"
+      ],
+      "../src/users/dtos/create-user.dto.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../src/podcast/dtos/output.dto.ts",
+        "../src/users/entities/user.entity.ts"
+      ],
+      "../src/users/entities/user.entity.ts": [
+        "../src/podcast/entities/core.entity.ts"
+      ],
+      "../src/users/users.resolver.ts": [
+        "../src/users/dtos/create-user.dto.ts",
+        "../src/users/users.service.ts"
+      ],
+      "../src/users/users.service.ts": [
+        "../node_modules/typeorm/index.d.ts",
+        "../src/users/dtos/create-user.dto.ts",
+        "../src/users/entities/user.entity.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -16018,6 +16106,7 @@
       "../node_modules/@types/babel__generator/index.d.ts",
       "../node_modules/@types/babel__template/index.d.ts",
       "../node_modules/@types/babel__traverse/index.d.ts",
+      "../node_modules/@types/bcrypt/index.d.ts",
       "../node_modules/@types/body-parser/index.d.ts",
       "../node_modules/@types/connect/index.d.ts",
       "../node_modules/@types/content-disposition/index.d.ts",
@@ -16856,7 +16945,12 @@
       "../src/podcast/entities/podcast.entity.ts",
       "../src/podcast/podcasts.module.ts",
       "../src/podcast/podcasts.resolver.ts",
-      "../src/podcast/podcasts.service.ts"
+      "../src/podcast/podcasts.service.ts",
+      "../src/users/dtos/create-user.dto.ts",
+      "../src/users/entities/user.entity.ts",
+      "../src/users/users.module.ts",
+      "../src/users/users.resolver.ts",
+      "../src/users/users.service.ts"
     ]
   },
   "version": "4.0.5"

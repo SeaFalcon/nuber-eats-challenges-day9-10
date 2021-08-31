@@ -15,6 +15,8 @@ const podcasts_module_1 = require("./podcast/podcasts.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const podcast_entity_1 = require("./podcast/entities/podcast.entity");
 const episode_entity_1 = require("./podcast/entities/episode.entity");
+const users_module_1 = require("./users/users.module");
+const user_entity_1 = require("./users/entities/user.entity");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -25,10 +27,11 @@ AppModule = __decorate([
                 database: 'db.sqlite3',
                 synchronize: true,
                 logging: true,
-                entities: [podcast_entity_1.Podcast, episode_entity_1.Episode],
+                entities: [podcast_entity_1.Podcast, episode_entity_1.Episode, user_entity_1.User],
             }),
             graphql_1.GraphQLModule.forRoot({ autoSchemaFile: true }),
             podcasts_module_1.PodcastsModule,
+            users_module_1.UsersModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
