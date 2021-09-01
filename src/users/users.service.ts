@@ -4,13 +4,14 @@ import { Repository } from 'typeorm';
 import { CreateUserInput, CreateUserOutput } from './dtos/create-user.dto';
 import { LoginInput, LoginOutput } from './dtos/login.dto';
 import { User } from './entities/user.entity';
-import * as jwt from 'jsonwebtoken';
-import * as bcrypt from 'bcrypt';
+import { JwtService } from '../jwt/jwt.service';
+
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly users: Repository<User>,
+    private readonly jwtService: JwtService,
   ) {}
 
   async createUser({
@@ -36,20 +37,37 @@ export class UsersService {
   }
 
   async login({ email, password }: LoginInput): Promise<LoginOutput> {
-    const user = await this.users.findOne(
-      { email },
-      { select: ['id', 'password'] },
-    );
+    try {
+      const user = await this.users.findOne(
+        { email },
+        { select: ['id', 'password'] },
+      );
+      if (!user) {
+        return {
+          ok: false,
+          error: 'User not found!',
+        };
+      }
 
-    const passwordCorrect = await bcrypt.compare(password, user.password);
+      const passwordCorrect = await user.checkPassword(password);
+      if (!passwordCorrect) {
+        return {
+          ok: false,
+          error: 'Wrong password!',
+        };
+      }
 
-    console.log('passwordCorrect', passwordCorrect);
+      const token = this.jwtService.sign({ id: user.id });
 
-    const token = jwt.sign({ id: user.id }, 'secret-key');
-
-    return {
-      ok: true,
-      token,
-    };
+      return {
+        ok: true,
+        token,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        error,
+      };
+    }
   }
 }
