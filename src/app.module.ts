@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import {
+  NestModule,
+  RequestMethod,
+  MiddlewareConsumer,
+  Module,
+} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -11,10 +16,8 @@ import { User } from './users/entities/user.entity';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from './jwt/jwt.module';
 import * as Joi from 'joi';
-import { NestModule } from '@nestjs/common';
-import { RequestMethod } from '@nestjs/common';
-import { JwtService } from './jwt/jwt.service';
-import { UsersService } from './users/users.service';
+import { JwtMiddleware } from './jwt/jwt.middleware';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -31,48 +34,26 @@ import { UsersService } from './users/users.service';
       logging: true,
       entities: [Podcast, Episode, User],
     }),
-    GraphQLModule.forRoot({ autoSchemaFile: true }),
+    GraphQLModule.forRoot({
+      autoSchemaFile: true,
+      context: ({ req }) => ({ user: req['user'] }),
+    }),
     JwtModule.forRoot({
       privateKey: process.env.PRIVATE_KEY,
       isGlobal: true,
     }),
     PodcastsModule,
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule implements NestModule {
-  constructor(
-    private readonly jwtService: JwtService,
-    private readonly UsersService: UsersService,
-  ) {}
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(async (req, res, next) => {
-        if ('x-jwt' in req.headers) {
-          const token = req.headers['x-jwt'];
-
-          try {
-            const decoded = this.jwtService.verify(token);
-
-            if (typeof decoded === 'object' && decoded.hasOwnProperty('id')) {
-              const { user, ok } = await this.UsersService.getUserProfile(
-                decoded.id,
-              );
-
-              if (ok) {
-                req['user'] = user;
-              }
-            }
-          } catch (e) {}
-        }
-
-        next();
-      })
-      .forRoutes({
-        path: '/graphql',
-        method: RequestMethod.POST,
-      });
+    consumer.apply(JwtMiddleware).forRoutes({
+      path: '/graphql',
+      method: RequestMethod.POST,
+    });
   }
 }

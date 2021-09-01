@@ -6,6 +6,7 @@ import { LoginInput, LoginOutput } from './dtos/login.dto';
 import { User } from './entities/user.entity';
 import { JwtService } from '../jwt/jwt.service';
 import { UserProfileOutput } from './dtos/user-profile.dto';
+import { EditProfileInput, EditProfileOutput } from './dtos/edit-profile.dto';
 
 @Injectable()
 export class UsersService {
@@ -82,6 +83,26 @@ export class UsersService {
       };
     } catch {
       return { ok: false, error: 'User not found!' };
+    }
+  }
+
+  async editUserProfile(
+    userId: number,
+    editProfileInput: EditProfileInput,
+  ): Promise<EditProfileOutput> {
+    try {
+      await this.users.update(userId, { ...editProfileInput });
+
+      return {
+        ok: true,
+      };
+    } catch (e) {
+      console.log(e);
+
+      return {
+        ok: false,
+        error: "Couldn't edit profile.",
+      };
     }
   }
 }
